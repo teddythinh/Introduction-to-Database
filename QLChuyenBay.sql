@@ -5,8 +5,8 @@
 USE master -- CHUYỂN CSDL MẶC ĐỊNH VỀ MASTER CỦA HỆ THỐNG
 GO  -- KẾT THÚC KHỐI LỆNH Ở TRÊN
 
-IF DB_ID('QLChuyenBay') IS NOT NULL -- KIỂM TRA XEM CÓ TỒN TẠI CSDL QLCHUYENBAY HAY KHÔNG 
-    DROP DATABASE QLChuyenBay  -- XOÁ CƠ SỞ DỮ LIỆU
+IF DB_ID('QLCHUYENBAY') IS NOT NULL -- KIỂM TRA XEM CÓ TỒN TẠI CSDL QLCHUYENBAY HAY KHÔNG 
+    DROP DATABASE QLCHUYENBAY -- XOÁ CƠ SỞ DỮ LIỆU
 GO
 
 CREATE DATABASE QLCHUYENBAY
@@ -129,10 +129,9 @@ ADD
     FOREIGN KEY (MACB)
     REFERENCES CHUYENBAY,
 
-    CONSTRAINT FK_LICHBAY_CHUYENBAY
-    FOREIGN KEY (SOHIEU)
-    REF
-       ('0422', '2000/31/10', '499')ERENCES CHUYENBAY
+    CONSTRAINT FK_LICHBAY_MAYBAY
+    FOREIGN KEY (SOHIEU, MALOAI)
+    REFERENCES MAYBAY
 
 ALTER TABLE MAYBAY
 ADD
@@ -159,15 +158,7 @@ ADD
 
     CONSTRAINT FK_PHANCONG_LICHBAY
     FOREIGN KEY (NGAYDI, MACB)
-    REFERENCES CHUYENBAY
-
-
--- BƯỚC 4: NHẬP LIỆU. BẢNG Ở ĐẦU CHÌA KHOÁ NHẬP TRƯỚC RỒI MỚI TỚI ĐẦU VÔ CỰC
-
--- CHUỖI KHÔNG DẤU: ĐỂ TRONG NHÁY ĐƠN 'ABC'
--- SỐ: NHẬP BÌNH THƯỜNG 3; 2.5
--- KIỂU NGÀY: THEO ĐỊNH DẠNG 'YYYY-MM-DD'
--- KIỂU GIỜ: THEO ĐỊNH DẠNG 'HH:MM:SS'
+    REFERENCES LICHBAY
 
 INSERT KHACHHANG (MAKH, TEN, DCHI, DIENTHOAI)
 VALUES ('0009', 'Nga', '223 Nguyen Trai', '8932320'),
@@ -183,35 +174,6 @@ VALUES ('0009', 'Nga', '223 Nguyen Trai', '8932320'),
        ('0613', 'Vu', '348 CMT8', '8343232'),
        ('0586', 'Son', '123 Bach Dang', '8556223'),
        ('0422', 'Tien', '75 Nguyen Thong', '8332222')
-
-INSERT LICHBAY (NGAYDI, MACB, SOHIEU, MALOAI)
-VALUES ('2000/1/11', '100', 80, 'A310'),
-       ('2000/1/11', '112', 21, 'DC10'),
-       ('2000/1/11', '206', 22, 'DC9'),
-       ('2000/1/11', '334', 10, 'B747'),
-       ('2000/1/11', '395', 23, 'DC9'),
-       ('2000/1/11', '991', 22, 'B757'),
-       ('2000/01/11', '337', 10, 'B747'),
-       ('2000/31/1', '100', 11, 'B727'),
-       ('2000/31/1', '112', 11, 'B727'),
-       ('2000/31/1', '206', 13, 'B727'),
-       ('2000/31/1', '334', 10, 'B747'),
-       ('2000/31/1', '335', 10, 'B747'),
-       ('2000/31/1', '337', 24, 'DC9'),
-       ('2000/31/1', '449', 70, 'A310')
-       
-INSERT DATCHO (MAKH, NGAYDI, MACB)
-VALUES ('0009', '2000/11/01', '100'),
-       ('0009', '2000/31/10', '449'),
-       ('0045', '2000/01/11', '991'),
-       ('0012', '2000/31/10', '206'),
-       ('0238', '2000/31/10', '334'),
-       ('0582', '2000/01/11', '991'),
-       ('0091', '2000/01/11', '100'),
-       ('0314', '2000/31/10', '449'),
-       ('0613', '2000/01/11', '100'),
-       ('0586', '2000/01/11', '991'), 
-       ('0586', '2000/31/10', '100')
 
 INSERT CHUYENBAY (MACB, SBDI, SBDEN, GIODI, GIODEN)
 VALUES ('100', 'SLC', 'BOS', '08:00', '17:50'),
@@ -263,9 +225,9 @@ VALUES ('1001', 'B727'),
        ('1002', 'DC9'),
        ('1003', 'A310'),
        ('1003', 'DC9')
-       
+
 INSERT MAYBAY (SOHIEU, MALOAI)
-VALUES (1O, 'B747'),
+VALUES (10, 'B747'),
        (11, 'B727'),
        (13, 'B727'),
        (13, 'B747'),
@@ -278,6 +240,22 @@ VALUES (1O, 'B747'),
        (70, 'A310'),
        (80, 'A310'),
        (93, 'B757')
+
+INSERT LICHBAY (NGAYDI, MACB, SOHIEU, MALOAI)
+VALUES ('2000/01/11', '100', 80, 'A310'),
+       ('2000/01/11', '112', 21, 'DC10'),
+       ('2000/01/11', '206', 22, 'DC9'),
+       ('2000/01/11', '334', 10, 'B747'),
+       ('2000/01/11', '395', 23, 'DC9'),
+       ('2000/01/11', '991', 22, 'B757'),
+       ('2000/01/11', '337', 10, 'B747'),
+       ('2000/01/31', '100', 11, 'B727'),
+       ('2000/01/31', '112', 11, 'B727'),
+       ('2000/01/31', '206', 13, 'B727'),
+       ('2000/01/31', '334', 10, 'B747'),
+       ('2000/01/31', '335', 10, 'B747'),
+       ('2000/01/31', '337', 24, 'DC9'),
+       ('2000/01/31', '449', 70, 'A310')
 
 INSERT PHANCONG (MANV, NGAYDI, MACB)
 VALUES ('1001', '2000/01/11', '100'),
@@ -295,27 +273,26 @@ VALUES ('1001', '2000/01/11', '100'),
        ('1007', '2000/01/11', '991'),
        ('1007', '2000/10/31', '206')
 
+INSERT DATCHO (MAKH, NGAYDI, MACB)
+VALUES ('0009', '2000/11/01', '100'),
+       ('0009', '2000/10/31', '449'),
+       ('0045', '2000/01/11', '991'),
+       ('0012', '2000/10/31', '206'),
+       ('0238', '2000/10/31', '334'),
+       ('0582', '2000/01/11', '991'),
+       ('0091', '2000/01/11', '100'),
+       ('0314', '2000/10/31', '449'),
+       ('0613', '2000/01/11', '100'),
+       ('0586', '2000/01/11', '991'), 
+       ('0586', '2000/10/31', '100')
 
 
 SELECT * FROM KHACHHANG
---CẬP NHẬT DỮ LIỆU (CHỈ DÙNG KHI CẦN THIẾT)
-UPDATE KHACHHANG 
-SET TEN = 'AAA', DCHI = 'BBB'
-WHERE MAKH = '1111' -- ĐIỀU KIỆN ĐỂ TÌM DÒNG CẬP NHẬT
-
--- XOÁ DÒNG BỊ SAI
-DELETE KHACHHANG
-WHERE MAKH = '1111'
-
--- --TRUY VẤN GOM NHÓM
--- SELECT COUNT(*) FROM DETAI --> CÓ BAO NHIÊU ĐỀ TÀI
--- -- ĐẾM SỐ ĐỀ TÀI THEO TỪNG CHỦ ĐỀ
--- -- CĐ1 = ?
--- -- CĐ2 = ?
--- SELECT CD.MACD, TENCD, COUNT(*) AS 'SỐ ĐỀ TÀI'
--- FROM DETAI DT, CHUDE CD
--- WHERE DT.MACD = CD.MACD
--- GROUP BY CD.MACD, TENCD
-
--- SELECT * FROM DETAI
-
+SELECT * FROM CHUYENBAY
+SELECT * FROM LOAIMB
+SELECT * FROM NHANVIEN
+SELECT * FROM KHANANG
+SELECT * FROM MAYBAY
+SELECT * FROM LICHBAY
+SELECT * FROM DATCHO
+SELECT * FROM PHANCONG
