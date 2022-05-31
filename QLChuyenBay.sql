@@ -131,7 +131,8 @@ ADD
 
     CONSTRAINT FK_LICHBAY_CHUYENBAY
     FOREIGN KEY (SOHIEU)
-    REFERENCES CHUYENBAY
+    REF
+       ('0422', '2000/31/10', '499')ERENCES CHUYENBAY
 
 ALTER TABLE MAYBAY
 ADD
@@ -183,6 +184,74 @@ VALUES ('0009', 'Nga', '223 Nguyen Trai', '8932320'),
        ('0586', 'Son', '123 Bach Dang', '8556223'),
        ('0422', 'Tien', '75 Nguyen Thong', '8332222')
 
+INSERT LICHBAY (NGAYDI, MACB, SOHIEU, MALOAI)
+VALUES ('2000/1/11', '100', 80, 'A310'),
+       ('2000/1/11', '112', 21, 'DC10'),
+       ('2000/1/11', '206', 22, 'DC9'),
+       ('2000/1/11', '334', 10, 'B747'),
+       ('2000/1/11', '395', 23, 'DC9'),
+       ('2000/1/11', '991', 22, 'B757'),
+       ('2000/01/11', '337', 10, 'B747'),
+       ('2000/31/1', '100', 11, 'B727'),
+       ('2000/31/1', '112', 11, 'B727'),
+       ('2000/31/1', '206', 13, 'B727'),
+       ('2000/31/1', '334', 10, 'B747'),
+       ('2000/31/1', '335', 10, 'B747'),
+       ('2000/31/1', '337', 24, 'DC9'),
+       ('2000/31/1', '449', 70, 'A310')
+       
+INSERT DATCHO (MAKH, NGAYDI, MACB)
+VALUES ('0009', '2000/11/01', '100'),
+       ('0009', '2000/31/10', '449'),
+       ('0045', '2000/01/11', '991'),
+       ('0012', '2000/31/10', '206'),
+       ('0238', '2000/31/10', '334'),
+       ('0582', '2000/01/11', '991'),
+       ('0091', '2000/01/11', '100'),
+       ('0314', '2000/31/10', '449'),
+       ('0613', '2000/01/11', '100'),
+       ('0586', '2000/01/11', '991'), 
+       ('0586', '2000/31/10', '100')
+
+INSERT CHUYENBAY (MACB, SBDI, SBDEN, GIODI, GIODEN)
+VALUES ('100', 'SLC', 'BOS', '08:00', '17:50'),
+       ('112', 'DCA', 'DEN', '14:00', '18:07'),
+       ('121', 'STL', 'SLC', '07:00', '09:13'),
+       ('122', 'STL', 'YYV', '08:30', '10:19'),
+       ('206', 'DFW', 'STL', '09:00', '11:40'),
+       ('330', 'JFK', 'YYV', '16:00', '18:53'),
+       ('334', 'ORD', 'MIA', '12:00', '14:14'),
+       ('335', 'MIA', 'ORD', '15:00', '17:14'),
+       ('336', 'ORD', 'MIA', '18:00', '20:14'),
+       ('337', 'MIA', 'ORD', '20:30', '23:53'),
+       ('394', 'DFW', 'MIA', '19:00', '21:30'),
+       ('395', 'MIA', 'DFW', '21:00', '23:43'),
+       ('449', 'CDG', 'DEN', '10:00', '19:29'),
+       ('930', 'YYV', 'DCA', '13:00', '16:10'),
+       ('931', 'DCA', 'YYV', '17:00', '18:10'),
+       ('932', 'DCA', 'YYV', '18:00', '19:10'),
+       ('991', 'BOS', 'ORD', '17:00', '18:22')
+
+INSERT LOAIMB (HANGSX, MALOAI)
+VALUES ('Airbus', 'A310'),
+       ('Airbus', 'A320'),
+       ('Airbus', 'A330'),
+       ('Airbus', 'A340'),
+       ('Boeing', 'B727'),
+       ('Boeing', 'B747'),
+       ('Boeing', 'B757'),
+       ('MD', 'DC10'),
+       ('MD', 'DC9')
+
+INSERT NHANVIEN (MANV, TEN, DCHI, DTHOAI, LUONG, LOAINV)
+VALUES ('1006', 'Chi', '12/6 Nguyen Kiem', '8120012', 150000, 0),
+       ('1005', 'Giao', '65 Nguyen Thai Son', '8324467', 500000, 0),
+       ('1001', 'Huong', '8 Dien Bien Phu', '8330733', 500000, 1),
+       ('1002', 'Phong', '1 Ly Thuong Kiet', '8308117', 450000, 1),
+       ('1004', 'Phuong', '351 Lac Long Quan', '8308155', 250000, 0),
+       ('1003', 'Quang', '78 Truong Dinh', '8324461', 150000, 1),
+       ('1007', 'Tam', '36 Nguyen Van Cu', '8458188', 500000, 0)
+
 SELECT * FROM KHACHHANG
 --CẬP NHẬT DỮ LIỆU (CHỈ DÙNG KHI CẦN THIẾT)
 UPDATE KHACHHANG 
@@ -193,15 +262,15 @@ WHERE MAKH = '1111' -- ĐIỀU KIỆN ĐỂ TÌM DÒNG CẬP NHẬT
 DELETE KHACHHANG
 WHERE MAKH = '1111'
 
---TRUY VẤN GOM NHÓM
-SELECT COUNT(*) FROM DETAI --> CÓ BAO NHIÊU ĐỀ TÀI
--- ĐẾM SỐ ĐỀ TÀI THEO TỪNG CHỦ ĐỀ
--- CĐ1 = ?
--- CĐ2 = ?
-SELECT CD.MACD, TENCD, COUNT(*) AS 'SỐ ĐỀ TÀI'
-FROM DETAI DT, CHUDE CD
-WHERE DT.MACD = CD.MACD
-GROUP BY CD.MACD, TENCD
+-- --TRUY VẤN GOM NHÓM
+-- SELECT COUNT(*) FROM DETAI --> CÓ BAO NHIÊU ĐỀ TÀI
+-- -- ĐẾM SỐ ĐỀ TÀI THEO TỪNG CHỦ ĐỀ
+-- -- CĐ1 = ?
+-- -- CĐ2 = ?
+-- SELECT CD.MACD, TENCD, COUNT(*) AS 'SỐ ĐỀ TÀI'
+-- FROM DETAI DT, CHUDE CD
+-- WHERE DT.MACD = CD.MACD
+-- GROUP BY CD.MACD, TENCD
 
-SELECT * FROM DETAI
+-- SELECT * FROM DETAI
 
