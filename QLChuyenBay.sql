@@ -252,6 +252,8 @@ VALUES ('1006', 'Chi', '12/6 Nguyen Kiem', '8120012', 150000, 0),
        ('1003', 'Quang', '78 Truong Dinh', '8324461', 150000, 1),
        ('1007', 'Tam', '36 Nguyen Van Cu', '8458188', 500000, 0)
 
+
+
 SELECT * FROM KHACHHANG
 --CẬP NHẬT DỮ LIỆU (CHỈ DÙNG KHI CẦN THIẾT)
 UPDATE KHACHHANG 
