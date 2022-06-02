@@ -2,7 +2,7 @@
 
 ## Introduction:
 
-This repo contains some of my javascript, html, css code for practicing front-end.
+This repo contains SQL for my course.
 
 **NOTE: I'm not sure whether my program is working properly, perhaps there are a few logical bugs, please feel free to contact me or open issues to fix these bugs. Thank you so much!**
 
