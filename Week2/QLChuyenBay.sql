@@ -1,6 +1,3 @@
-﻿-- MSSV: 20127335
--- TOPIC: 02
-
 USE master -- CHUYỂN CSDL MẶC ĐỊNH VỀ MASTER CỦA HỆ THỐNG
 GO  -- KẾT THÚC KHỐI LỆNH Ở TRÊN
 
