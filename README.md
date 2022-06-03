@@ -2,7 +2,7 @@
 
 ## Introduction:
 
-This repo contains SQL for my course.
+This repo contains SQL exercises and homework for my database course.
 
 **NOTE: I'm not sure whether my program is working properly, perhaps there are a few logical bugs, please feel free to contact me or open issues to fix these bugs. Thank you so much!**
 
