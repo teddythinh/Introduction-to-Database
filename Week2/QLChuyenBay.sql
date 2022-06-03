@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿USE master -- CHUYỂN CSDL MẶC ĐỊNH VỀ MASTER CỦA HỆ THỐNG
-=======
 USE master -- CHUYỂN CSDL MẶC ĐỊNH VỀ MASTER CỦA HỆ THỐNG
->>>>>>> e5de0d0f50fda452bb8d5c4357b49bdad3a0d358
 GO  -- KẾT THÚC KHỐI LỆNH Ở TRÊN
 
 IF DB_ID('QLCHUYENBAY') IS NOT NULL -- KIỂM TRA XEM CÓ TỒN TẠI CSDL QLCHUYENBAY HAY KHÔNG 
