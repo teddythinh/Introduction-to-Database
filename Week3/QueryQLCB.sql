@@ -229,8 +229,10 @@ FROM
     NHANVIEN NV,
     PHANCONG PC
 WHERE
-    NV.MANV <> PC.MANV
-    AND LOAINV = 1 
+    SELECT DISTINCT TEN
+    FROM NHANVIEN NV
+    WHERE NV.MANV NOT IN (SELECT MANV FROM PHANCONG)
+    AND LOAINV = 1
     
 -- CÂU 15: Cho biết tên khách hàng đã đi chuyến bay trên máy bay của hãng "Boeing".
 SELECT
