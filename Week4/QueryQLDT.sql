@@ -1,4 +1,7 @@
-USE QLDETAI GO 
+-- MSSV: 20127335
+-- Topic: 04
+USE QLDETAI 
+GO 
 
 -- CÂU 1: Cho biết họ tên và mức lương của các giáo viên nữ.
 SELECT
@@ -7,7 +10,7 @@ SELECT
 FROM
     GIAOVIEN
 WHERE
-    PHAI = N 'Nữ' 
+    PHAI = N'Nữ' 
     
 -- CÂU 2: Cho biết họ tên của các giáo viên và lương của họ sau khi tăng 10%.
 SELECT
@@ -24,11 +27,15 @@ FROM
     GIAOVIEN GV,
     BOMON BM
 WHERE
-    GV.HOTEN LIKE N 'Nguyễn%'
-    AND LUONG > 2000.0
-    OR GV.MABM = BM.MABM
-    AND GV.GVQLBM = BM.TRUONGBM
-    AND YEAR(BM.NGAYNHANCHUC) = 1995 
+    (
+        GV.HOTEN LIKE N'Nguyễn%'
+        AND LUONG > 2000.0
+    )
+    OR (
+        GV.MABM = BM.MABM
+        AND GV.GVQLBM = BM.TRUONGBM
+        AND YEAR(BM.NGAYNHANCHUC) = 1995
+    ) 
     
 -- CÂU 4: Cho biết tên những giáo viên khoa Công nghệ thông tin.
 SELECT
@@ -91,7 +98,7 @@ WHERE
     GV.MABM = BM.MABM
     AND TGDT.MAGV = GV.MAGV
     AND BM.TENBM = N'Vi sinh'
-    AND TGDT.MADT = 006
+    AND TGDT.MADT = 006 
     
 -- CÂU 10: Với những đề tài thuộc cấp quản lý “Thành phố”, cho biết mã đề tài, đề tài 
 -- thuộc về chủ đề nào, họ tên người chủ nhiệm đề tài cùng với 
@@ -110,14 +117,16 @@ WHERE
     DT.GVCNDT = GV.MAGV
     AND DT.MACD = CD.MACD
     AND DT.CAPQL = N'Trường' 
-
+    
 -- CÂU 11: Tìm họ tên của từng giáo viên và người phụ trách chuyên môn trực tiếp của giáo viên đó.
 SELECT
-    GV.HOTEN
+    DISTINCT GV1.HOTEN
 FROM
-    GIAOVIEN GV
+    GIAOVIEN GV1,
+    GIAOVIEN GV2
 WHERE
-    GV.MAGV = GV.GVQLBM 
+    GV1.MAGV <> GV2.MAGV
+    AND GV2.GVQLBM = GV1.MAGV 
     
 -- CÂU 12: Tìm họ tên của những giáo viên được “Nguyễn Thanh Tùng” phụ trách trực tiếp.
 -- CÂU 13: Cho biết tên giáo viên là trưởng bộ môn “Hệ thống thông tin”.
@@ -129,7 +138,7 @@ FROM
 WHERE
     GV.MAGV = BM.TRUONGBM
     AND TENBM = N'Hệ thống thông tin' 
-
+    
 -- CÂU 14: Cho biết tên người chủ nhiệm đề tài của những đề tài thuộc chủ đề Quản lý giáo dục.
 SELECT
     GV.HOTEN
@@ -152,21 +161,19 @@ FROM
 WHERE
     CV.MADT = DT.MADT
     AND DT.TENDT = N'HTTT quản lý các trường ĐH'
-
-
     AND YEAR(CV.NGAYBD) = 2008
-    AND MONTH(CV.NGAYBD) = 3
-
+    AND MONTH(CV.NGAYBD) = 3 
+    
 -- CÂU 16: Cho biết tên giáo viên và tên người quản lý chuyên môn của giáo viên đó.
 SELECT
-    GV.HOTEN AS TENGV,
-    NQL.HOTEN AS TENNQL
+    GV.HOTEN,
+    NQL.HOTEN
 FROM
     GIAOVIEN GV,
     GIAOVIEN NQL
 WHERE
     GV.GVQLBM = NQL.MAGV 
-
+    
 -- CÂU 17: Cho các công việc bắt đầu trong khoảng từ 01/01/2007 đến 01/08/2007.
 SELECT
     TENCV
@@ -175,8 +182,94 @@ FROM
 WHERE
     NGAYBD BETWEEN '2007/01/01'
     AND '2007/08/01' 
-
+    
 -- CÂU 18: Cho biết họ tên các giáo viên cùng bộ môn với giáo viên “Trần Trà Hương”.
+SELECT
+    GV2.HOTEN
+FROM
+    GIAOVIEN GV1,
+    GIAOVIEN GV2
+WHERE
+    GV1.HOTEN = N'Trần Trà Hương'
+    AND GV1.MABM = GV2.MABM
+    AND GV1.MAGV <> GV2.MAGV 
+    
+-- CÂU 19: Tìm những giáo viên vừa là trưởng bộ môn vừa chủ nhiệm đề tài.
+SELECT
+    DISTINCT GV.HOTEN
+FROM
+    GIAOVIEN GV,
+    BOMON BM,
+    DETAI DT
+WHERE
+    GV.MABM = BM.MABM
+    AND GV.MAGV = DT.GVCNDT
+    AND GV.MAGV = BM.TRUONGBM 
+    
+-- CÂU 20: Cho biết tên những giáo viên vừa là trưởng khoa và vừa là trưởng bộ môn.
+SELECT
+    GV.HOTEN
+FROM
+    GIAOVIEN GV,
+    KHOA K,
+    BOMON BM
+WHERE
+    GV.MABM = BM.MABM
+    AND K.MAKHOA = BM.MAKHOA
+    AND GV.MAGV = BM.TRUONGBM
+    AND GV.MAGV = K.TRUONGKHOA 
+    
+-- CÂU 21: Cho biết tên những trưởng bộ môn mà vừa chủ nhiệm đề tài.
+SELECT
+    DISTINCT GV.HOTEN
+FROM
+    GIAOVIEN GV,
+    BOMON BM,
+    DETAI DT
+WHERE
+    GV.MABM = BM.MABM
+    AND GV.MAGV = DT.GVCNDT
+    AND GV.MAGV = BM.TRUONGBM 
+    
+-- CÂU 22: Cho biết mã số các trưởng khoa có chủ nhiệm đề tài.
+SELECT
+    GV.MAGV
+FROM
+    KHOA K,
+    GIAOVIEN GV,
+    DETAI DT
+WHERE
+    K.TRUONGKHOA = GV.MAGV
+    AND GV.MAGV = DT.GVCNDT 
+    
+-- CÂU 23: Cho biết mã số các giáo viên thuộc bộ môn “HTTT”
+-- hoặc có tham gia đề tài mã “001”.
+SELECT
+    DISTINCT GV.MAGV
+FROM
+    GIAOVIEN GV,
+    BOMON BM,
+    THAMGIADT TGDT
+WHERE
+    GV.MABM = BM.MABM
+    AND TGDT.MAGV = GV.MAGV
+    AND (
+        BM.MABM = N'HTTT'
+        OR TGDT.MADT = '001'
+    ) 
+    
+-- CÂU 24: Cho biết giáo viên làm việc cùng bộ môn với giáo viên 002.
+SELECT
+    GV2.HOTEN
+FROM
+    GIAOVIEN GV1,
+    GIAOVIEN GV2
+WHERE
+    GV1.MAGV <> GV2.MAGV
+    AND GV1.MABM = GV2.MABM
+    AND GV1.MAGV = '002' 
+    
+-- CÂU 25: Tìm những giáo viên là trưởng bộ môn.
 SELECT
     GV.HOTEN
 FROM
@@ -184,3 +277,11 @@ FROM
     BOMON BM
 WHERE
     GV.MABM = BM.MABM
+    AND GV.MAGV = BM.TRUONGBM 
+    
+-- CÂU 26: Cho biết họ tên và mức lương của các giáo viên.
+SELECT
+    HOTEN,
+    LUONG
+FROM
+    GIAOVIEN
