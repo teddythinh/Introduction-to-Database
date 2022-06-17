@@ -1,5 +1,3 @@
--- MSSV: 20127335
--- Topic: 04
 USE QLDETAI 
 GO 
 
