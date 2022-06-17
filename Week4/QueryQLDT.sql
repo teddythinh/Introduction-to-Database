@@ -127,6 +127,14 @@ WHERE
     AND GV2.GVQLBM = GV1.MAGV 
     
 -- CÂU 12: Tìm họ tên của những giáo viên được “Nguyễn Thanh Tùng” phụ trách trực tiếp.
+SELECT 
+	GV1.HOTEN
+FROM 
+	GIAOVIEN GV1, GIAOVIEN GV2
+WHERE 
+	GV1.MAGV = GV2.GVQLBM 
+	AND GV2.HOTEN = N'Nguyễn Thanh Tùng' 
+
 -- CÂU 13: Cho biết tên giáo viên là trưởng bộ môn “Hệ thống thông tin”.
 SELECT
     GV.HOTEN
@@ -135,7 +143,7 @@ FROM
     BOMON BM
 WHERE
     GV.MAGV = BM.TRUONGBM
-    AND TENBM = N'Hệ thống thông tin' 
+    AND BM.TENBM = N'Hệ thống thông tin' 
     
 -- CÂU 14: Cho biết tên người chủ nhiệm đề tài của những đề tài thuộc chủ đề Quản lý giáo dục.
 SELECT
