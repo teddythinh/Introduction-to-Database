@@ -1,6 +1,6 @@
 # Introduction-to-Database
 
-## Introduction:
+## Introduction
 
 This repo contains SQL exercises and homework for my database course.
 
@@ -8,15 +8,17 @@ This repo contains SQL exercises and homework for my database course.
 
 PLEASE GIVE MY CREDIT OR MENTION ME `@teddythinh` WHEN USING. THANKS !☺️☺️☺️
 
-## Database uses:
-![](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
+## Database uses
 
-## Contribution:
+![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
+
+## Contribution
 
 Contributions are not encouraged here because these are my homework. Thank you for understanding.
 
-## Contents:
-### Homework and exercises:
+## Contents
+
+### Homework and exercises
 
 | Number | Context | Description |
 | ------ | ------- | ----------- |
