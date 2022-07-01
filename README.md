@@ -1,4 +1,4 @@
-# Introduction-to-Database
+# Introduction to Database, Semester 3, HCMUS
 
 ## Introduction
 
