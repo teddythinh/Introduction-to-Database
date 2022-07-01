@@ -3,8 +3,7 @@
 USE QLCHUYENBAY 
 GO 
 
--- CÂU 34: Cho biết hãng sản xuất, mã loại và số hiệu của máy bay đã được sử
--- dụng nhiều nhất.
+-- CÂU 34: Cho biết hãng sản xuất, mã loại và số hiệu của máy bay đã được sử dụng nhiều nhất.
 SELECT
 	LMB.HANGSX AS N'Hãng sản xuất',
 	LMB.MALOAI AS N'Mã loại',
@@ -58,8 +57,8 @@ HAVING
 		GROUP BY
 			NV.TEN ) 
             
--- CÂU 36: Cho biết thông tin của phi công (tên, địa chỉ, điện thoại) lái nhiều
--- chuyến bay nhất.
+-- CÂU 36: Cho biết thông tin của phi công 
+-- (tên, địa chỉ, điện thoại) lái nhiều chuyến bay nhất.
 SELECT
 	NV.TEN AS N'Tên',
 	NV.DCHI AS N'Địa chỉ',
@@ -99,8 +98,8 @@ HAVING
 			NV1.DCHI,
 			NV1.DTHOAI ) 
             
--- CÂU 37: Cho biết sân bay (SBDEN) và số lượng chuyến bay của sân bay có ít
--- chuyến bay đáp xuống nhất.
+-- CÂU 37: Cho biết sân bay (SBDEN) và số lượng 
+-- chuyến bay của sân bay có ít chuyến bay đáp xuống nhất.
 SELECT
 	CB.SBDEN AS N'Sân bay đến',
 	COUNT(*) AS N'Số lượng chuyến bay'
@@ -117,8 +116,8 @@ HAVING
 		GROUP BY
 			CB1.SBDEN ) 
             
--- CÂU 38: Cho biết sân bay (SBDI) và số lượng chuyến bay của sân bay có nhiều
--- chuyến bay xuất phát nhất.
+-- CÂU 38: Cho biết sân bay (SBDI) và số lượng 
+-- chuyến bay của sân bay có nhiều chuyến bay xuất phát nhất.
 SELECT
 	CB.SBDI AS N'Sân bay đi',
 	COUNT(*) AS N'Số lượng chuyến bay'
@@ -135,8 +134,7 @@ HAVING
 		GROUP BY
 			CB1.SBDI ) 
             
--- CÂU 39: Cho biết tên, địa chỉ, và điện thoại của khách hàng đã đi trên nhiều
--- chuyến bay nhất.
+-- CÂU 39: Cho biết tên, địa chỉ, và điện thoại của khách hàng đã đi trên nhiều chuyến bay nhất.
 SELECT
 	KH.TEN AS N'Tên',
 	KH.DCHI AS N'Địa chỉ',
@@ -164,8 +162,7 @@ HAVING
 			KH1.DCHI,
 			KH1.DIENTHOAI ) 
             
--- CÂU 40: Cho biết mã số, tên và lương của các phi công có khả năng lái nhiều
--- loại máy bay nhất.
+-- CÂU 40: Cho biết mã số, tên và lương của các phi công có khả năng lái nhiều loại máy bay nhất.
 SELECT
 	NV.MANV AS N'Mã số',
 	NV.TEN AS N'Tên',
@@ -193,8 +190,7 @@ HAVING
 			NV1.TEN,
 			NV1.LUONG ) 
             
--- CÂU 41: Cho biết thông tin (mã nhân viên, tên, lương) của nhân viên có mức
--- lương cao nhất.
+-- CÂU 41: Cho biết thông tin (mã nhân viên, tên, lương) của nhân viên có mức lương cao nhất.
 SELECT
 	NV.MANV AS N'Mã nhân viên',
 	NV.TEN AS N'Tên',
@@ -213,8 +209,8 @@ HAVING
 			NHANVIEN NV2 ) 
             
 -- CÂU 42: Cho biết tên, địa chỉ của các nhân viên có lương cao nhất trong phi
--- hành đoàn (các nhân viên được phân công trong một chuyến bay) mà
--- người đó tham gia.
+-- hành đoàn (các nhân viên được phân công trong một chuyến bay) mà người đó tham gia.
+
 SELECT
 	DISTINCT NV.TEN AS N'Tên',
 	NV.DCHI AS N'Địa chỉ'
@@ -234,8 +230,8 @@ WHERE
 			AND PC2.MACB = PC.MACB
 			AND NV2.MANV = PC2.MANV ) 
             
--- CÂU 43: Cho biết mã chuyến bay, giờ đi và giờ đến của chuyến bay bay sớm
--- nhất trong ngày.
+-- CÂU 43: Cho biết mã chuyến bay, giờ đi và giờ đến 
+-- của chuyến bay bay sớm nhất trong ngày.
 SELECT
 	CB.MACB AS N'Mã chuyến bay',
 	CB.GIODI AS N'Giờ đi',
@@ -260,8 +256,8 @@ WHERE
 		HAVING
 			CB.GIODI = MIN(CB2.GIODI) ) 
             
--- CÂU 44: Cho biết mã chuyến bay có thời gian bay dài nhất. Xuất ra mã chuyến
--- bay và thời gian bay (tính bằng phút).
+-- CÂU 44: Cho biết mã chuyến bay có thời gian bay dài nhất.
+-- Xuất ra mã chuyến bay và thời gian bay (tính bằng phút).
 SELECT
 	CB.MACB AS N'Mã chuyến bay',
 	DATEDIFF(minute, CB.GIODI, CB.GIODEN) AS N'Thời gian bay (phút)'
@@ -274,8 +270,8 @@ WHERE
 		FROM
 			CHUYENBAY CB2 ) 
             
--- CÂU 45: Cho biết mã chuyến bay có thời gian bay ít nhất. Xuất ra mã chuyến
--- bay và thời gian bay.
+-- CÂU 45: Cho biết mã chuyến bay có thời gian bay ít nhất.
+-- Xuất ra mã chuyến bay và thời gian bay.
 SELECT
 	CB.MACB AS N'Mã chuyến bay',
 	DATEDIFF(minute, CB.GIODI, CB.GIODEN) AS N'Thời gian bay (phút)'
@@ -288,8 +284,8 @@ WHERE
 		FROM
 			CHUYENBAY CB2 ) 
             
--- CÂU 46:	Cho biết mã chuyến bay và ngày đi của những chuyến bay bay trên loại
--- máy bay B747 nhiều nhất.
+-- CÂU 46: Cho biết mã chuyến bay và ngày đi của những 
+-- chuyến bay bay trên loại máy bay B747 nhiều nhất.
 SELECT
 	LB.MACB AS N'Mã chuyến bay',
 	LB.NGAYDI AS N'Ngày đi'
@@ -318,8 +314,7 @@ WHERE
 					MACB ) ) 
                     
 -- CÂU 47: Với mỗi chuyến bay có trên 3 hành khách, cho biết mã chuyến bay và
--- số lượng nhân viên trên chuyến bay đó. Xuất ra mã chuyến bay và số
--- lượng nhân viên.
+-- số lượng nhân viên trên chuyến bay đó. Xuất ra mã chuyến bay và số lượng nhân viên.
 SELECT
 	PC.MACB AS N'Mã chuyến bay',
 	COUNT(DISTINCT PC.MANV) AS N'Số lượng nhân viên'
@@ -338,11 +333,52 @@ GROUP BY
 HAVING
 	COUNT(DISTINCT DC.MAKH) >= 3 
     
--- CÂU 48: Với mỗi loại nhân viên có tổng lương trên 600000, cho biết số lượng
--- nhân viên trong từng loại nhân viên đó. Xuất ra loại nhân viên, và số
--- lượng nhân viên tương ứng.
+-- CÂU 48: Với mỗi loại nhân viên có tổng lương trên 600000, cho biết số lượng nhân viên 
+-- trong từng loại nhân viên đó. Xuất ra loại nhân viên, và số lượng nhân viên tương ứng.
 SELECT
-	NV.LOAINV,
-	COUNT(NV.MANV)
+	NV.LOAINV AS N'Loại nhân viên',
+	COUNT(NV.MANV) AS N'Số lượng nhân viên'
 FROM
 	NHANVIEN NV
+GROUP BY
+	NV.LOAINV
+HAVING
+	SUM(NV.LUONG) > 600000 
+	
+-- CÂU 49: Với mỗi chuyến bay có trên 3 nhân viên, cho biết mã 
+-- chuyến bay và số lượng khách hàng đã đặt chỗ trên chuyến bay đó.
+SELECT
+	CB.MACB AS N'Mã chuyến bay',
+	COUNT(DISTINCT DC.MAKH) AS N'Số lượng khách hàng đã đặt chỗ trên chuyến bay'
+FROM
+	CHUYENBAY CB,
+	DATCHO DC,
+	PHANCONG PC
+WHERE
+	CB.MACB = DC.MACB
+	AND PC.MACB = CB.MACB
+GROUP BY
+	CB.MACB,
+	PC.NGAYDI
+HAVING
+	COUNT(DISTINCT PC.MANV) >= 3 
+	
+-- CÂU 50: Với mỗi loại máy bay có nhiều hơn một chiếc, cho biết số lượng chuyến
+-- bay đã được bố trí bay bằng loại máy bay đó. Xuất ra mã loại và số lượng.
+SELECT
+	LB.MALOAI AS N'Mã loại',
+	COUNT(*) AS N'Số lượng máy bay'
+FROM
+	LICHBAY LB
+WHERE
+	LB.MALOAI IN (
+		SELECT
+			MB.MALOAI
+		FROM
+			MAYBAY MB
+		GROUP BY
+			MALOAI
+		HAVING
+			COUNT(*) > 1 )
+GROUP BY
+	LB.MALOAI
